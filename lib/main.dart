@@ -38,40 +38,13 @@ class _MyAppState extends State<MyApp> {
       appBar: AppBar(
         title: const Text('Tareas pendientes'),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          showDialog(
-              context: context,
-              builder: (BuildContext context) {
-                return AlertDialog(
-                  title: const Text('Agregar tarea'),
-                  content: TextField(
-                    onChanged: (String value) {
-                      input = value;
-                    },
-                  ),
-                  actions: [
-                    TextButton(
-                        onPressed: () {
-                          setState(() {
-                            todos.add(input);
-                          });
-                          Navigator.of(context).pop();
-                        },
-                        child: const Text('Agregar'))
-                  ],
-                );
-              });
-        },
-        child: const Icon(Icons.add, color: Colors.white),
-      ),
       body: ListView.builder(
           itemCount: todos.length,
           itemBuilder: (BuildContext context, int index) {
             return Dismissible(
                 key: Key(todos[index]),
                 child: Card(
-                  elevation: 4,
+                  elevation: 4.5,
                   margin: const EdgeInsets.all(5),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(5),
@@ -90,6 +63,36 @@ class _MyAppState extends State<MyApp> {
                   ),
                 ));
           }),
+          floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            showDialog(
+                context: context,
+                builder: (BuildContext context) {
+                  return AlertDialog(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    title: const Text('Agregar tarea'),
+                    content: TextField(
+                      onChanged: (String value) {
+                        input = value;
+                      },
+                    ),
+                    actions: [
+                      TextButton(
+                          onPressed: () {
+                            setState(() {
+                              todos.add(input);
+                            });
+                            Navigator.of(context).pop();
+                          },
+                          child: const Text('Agregar'))
+                    ],
+                  );
+                });
+            },
+            child: const Icon(Icons.add, color: Colors.white),
+          ),
     );
   }
 }
